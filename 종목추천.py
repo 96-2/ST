@@ -34,9 +34,8 @@ def post_message(token, channel, text):
         headers={"Authorization": "Bearer "+token},
         data={"channel": channel,"text": text}
     )
-# slack = Slacker('xoxb-3686270987524-3683946775731-COcMB0qZE2CHo1Mdj27f4rS6')
 
-myToken = "xoxb-3686270987524-3683946775731-COcMB0qZE2CHo1Mdj27f4rS6"
+myToken = ### 슬랙토큰 ###
 
 def dbgout(message):
     """인자로 받은 문자열을 파이썬 셸과 슬랙으로 동시에 출력한다."""
