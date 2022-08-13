@@ -165,72 +165,16 @@ def GetFinalResult():
         weeklyIndex = GetData_Weekly(code)
         # 시, 종, 저, 고, 전일5, 당일5, 전일전환, 당일전환, 전일atr, 당일atr
         # 0   1   2  3   4      5       6       7       8       9
-        if dailyIndex[4] - dailyIndex[6] < dailyIndex[5] - dailyIndex[7]:
-            if dailyIndex[1] - dailyIndex[2] >= 1.5 * dailyIndex[9]:
-                if dailyIndex[3] - dailyIndex[2] <= 4 * dailyIndex[8]:
+        if ####조건부분#####:
+            if ####조건부분#####:
+                if ####조건부분#####:
                     # print(code)
                     # print(dailyIndex)
                     # print(weeklyIndex)
                     ret1.append(code)
                     ret2.append(dailyIndex)
                     ret3.append(weeklyIndex)
-                    print(code, (dailyIndex[1] - dailyIndex[2]) / dailyIndex[9], ' >= ', 1.5)
-                    print(code, (dailyIndex[3] - dailyIndex[2]) / dailyIndex[8], '<= ', 4)
-        if dailyIndex[4] - dailyIndex[6] < dailyIndex[5] - dailyIndex[7]:
-            if dailyIndex[1] - dailyIndex[2] >= 1.4 * dailyIndex[9]:
-                if dailyIndex[3] - dailyIndex[2] <= 4.3 * dailyIndex[8]:
-                    # print(code)
-                    # print(dailyIndex)
-                    # print(weeklyIndex)
-                    if code not in ret1:
-                        ret1.append(code)
-                        ret2.append(dailyIndex)
-                        ret3.append(weeklyIndex)
-                        print(code, (dailyIndex[1] - dailyIndex[2]) / dailyIndex[9], ' >= ', 1.5)
-                        print(code, (dailyIndex[3] - dailyIndex[2]) / dailyIndex[8], '<= ', 4)
-        # if dailyIndex[4] - dailyIndex[6] < dailyIndex[5] - dailyIndex[7]:
-        #     if dailyIndex[1] - dailyIndex[2] >= 1.2 * dailyIndex[9]:
-        #         if dailyIndex[3] - dailyIndex[2] <= 4.8 * dailyIndex[8]:
-        #             # print(code)
-        #             # print(dailyIndex)
-        #             # print(weeklyIndex)
-        #             ret1.append(code)
-        #             ret2.append(dailyIndex)
-        #             ret3.append(weeklyIndex)
-
-        # # 좀 더 여유로운 조건
-        # if dailyIndex[4] - dailyIndex[6] < dailyIndex[5] - dailyIndex[7]:
-        #     if dailyIndex[1] - dailyIndex[2] >= 1.5 * dailyIndex[9]:
-        #         if dailyIndex[3] - dailyIndex[0] <= 4 * dailyIndex[8]:
-        #             # print(code)
-        #             # print(dailyIndex)
-        #             # print(weeklyIndex)
-        #             ret1.append(code)
-        #             ret2.append(dailyIndex)
-        #             ret3.append(weeklyIndex)
-        #
-        # # 좀 더 여유로운 조건
-        # if dailyIndex[4] - dailyIndex[6] < dailyIndex[5] - dailyIndex[7]:
-        #     if dailyIndex[1] - dailyIndex[2] >= 1.25 * dailyIndex[9]:
-        #         if dailyIndex[3] - dailyIndex[0] <= 4.25 * dailyIndex[8]:
-        #             # print(code)
-        #             # print(dailyIndex)
-        #             # print(weeklyIndex)
-        #             ret1.append(code)
-        #             ret2.append(dailyIndex)
-        #             ret3.append(weeklyIndex)
-        #
-        # # 좀 더더 여유로운 조건
-        # if dailyIndex[4] - dailyIndex[6] < dailyIndex[5] - dailyIndex[7]:
-        #     if dailyIndex[1] - dailyIndex[2] >= 1 * dailyIndex[9]:
-        #         if dailyIndex[3] - dailyIndex[0] <= 4.5 * dailyIndex[8]:
-        #             # print(code)
-        #             # print(dailyIndex)
-        #             # print(weeklyIndex)
-        #             ret1.append(code)
-        #             ret2.append(dailyIndex)
-        #             ret3.append(weeklyIndex)
-
+       
     print('2차 대상 ', len(ret1), '개')
     dbgout(str(ret1))
     print(ret1)
