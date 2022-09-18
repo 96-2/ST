@@ -162,8 +162,6 @@ def GetFinalResult():
         #     continue
         dailyIndex = GetData_Daily(code)
         weeklyIndex = GetData_Weekly(code)
-        # 시, 종, 저, 고, 전일5, 당일5, 전일전환, 당일전환, 전일atr, 당일atr
-        # 0   1   2  3   4      5       6       7       8       9
         if ####조건부분#####:
             if ####조건부분#####:
                 if ####조건부분#####:
@@ -201,11 +199,7 @@ def UpdateCsv():
             i = codes[ind]
             if i in list(csv_origin.loc[:, '종목코드']):
                 continue
-            # 출력
-            # 시, 종, 저, 고, 전일5, 당일5, 전일전환, 당일전환, 전일atr, 당일atr
-            # 0   1   2  3   4      5       6       7       8       9
-            # csv
-            # 종목코드	종가	시가	5일이평	일전환선	5주이평	주전환선	당일ATR 손절가
+            #조건부분
             writer_object.writerow(
                 [i, dailyIndex[ind][1], 'X', dailyIndex[ind][5], dailyIndex[ind][7],
                  weeklyIndex[ind][5], weeklyIndex[ind][7], dailyIndex[ind][9],
@@ -277,7 +271,6 @@ def CheckConclusion1530():
     objCheckNotConcluded.SetInputValue(7, 20)
 
     # 2. 정보 요청
-    # 16:00에 request해 체결 되었는지 확인 -> 그냥 함수 호출을 16:00에 하기
     ret = objCheckNotConcluded.BlockRequest()
 
     # 통신 초과 요청 방지에 의한 요류 인 경우
@@ -331,7 +324,6 @@ def CheckConclusion1530():
 
 
 def exe1530():
-    dbgout('15:30분 함수 실행')
     UpdateCsv()
     time.sleep(5)
     OrderBuy1530()
@@ -361,8 +353,6 @@ def GetOrderPrice():
 
     # 'O' 개수로 구분하기
     for index in csv_cur.index:
-        # 하나도 없으면
-        # 종가 매수 구분 필요? -> 전일 종가에 주문 넣기 위해 : 15:30~18:00(시간외단일가 포함)
         if 'O' not in csv_cur.loc[index, :].unique():
             targetCode.append(index)
             targetPrice.append(csv_cur.loc[index, '종가'])
@@ -384,9 +374,6 @@ def GetOrderPrice():
 
             prices.sort()
 
-            # O의 개수가 0개면, 가장 낮은 가격에 Qty=2, 그다음에4, 그다음에 8, 그다음에 16
-            # 1개면 가장낮은 가격에 4부터 하나씩
-            # 즉, 0개수따라 제일 낮은 가격부터 OrderCount[Ocount] and Ocount += 1로 늘려가기
             for i in range(countO, 4):
                 ind = i - countO
                 targetCode.append(index)
@@ -404,15 +391,11 @@ def GetOrderPrice():
                 else:
                     target_price = round(target_price_tmp, -2)
                 targetPrice.append(target_price)
-                # 1 당 얼마를 투자할지는 추후 매수 주문 때?
                 targetQty.append(OrderCount[i])
                 targetDcd.append(prices[ind][1])
                 targetBuySell.append('매수')
 
             # 매도부 구현 (익절가로 주문 넣기)
-            # O 개수에 따라 익절가 바뀐다
-            # ATR * (5 - Ocount/6) --> 즉, 물 4번 다 탔으면 수익률 ATR/6에 매도 / 한번도 물 안탔으면 5/6 ATR
-            # 우선, 현재 계좌에 대한 정보를 가져오도록 cp0322에 정보 입력
             # objAccStat
             # objCpTradeUtil.TradeInit()
             # acc = objCpTradeUtil.AccountNumber[0]  # 계좌번호
@@ -461,28 +444,5 @@ def GetOrderPrice():
     return targetCode, targetPrice, targetQty, targetDcd, targetBuySell
 
 
-# UpdateCsv()
-# print(GetOrderTarget_1530())
-# GetData_Daily('A007770')
-# print(GetFinalResult())
-# print(GetOrderPrice())
-# (['A007770', 'A340440', 'A206650', 'A101670', 'A236200', 'A343510', 'A032960', 'A086520'], [21700, 4040, 17250, 1990, 21700, 2205, 14400, 88500], [1, 1, 1, 1, 1, 1, 1, 1], ['종가', '종가', '종가', '종가', '종가', '종가', '종가', '종가'], ['매수', '매수', '매수', '매수', '매수', '매수', '매수', '매수'])
-
 UpdateCsv()
 
-
-# csv 업데이트법
-# with open('tmp.csv', 'r', newline='') as f_object:
-#     writer_object = writer(f_object)
-#     rdr = reader(f_object)
-#     lines = []
-#     for line in rdr:
-#         if line[0] == 'A049410':
-#             line[1] = 'O'
-#         lines.append(line)
-#     f_object.close()
-#
-# with open('tmp.csv', 'w', newline='') as f_object:
-#     writer_object = writer(f_object)
-#     writer_object.writerows(lines)
-#     f_object.close()
